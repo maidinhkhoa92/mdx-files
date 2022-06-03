@@ -18,7 +18,7 @@ const Home: NextPage = () => {
 
   return (
     <div className="container mx-auto pt-5">
-      <table className="table-fixed w-full">
+      <table className="table-fixed w-full text-center">
         <thead>
           <tr>
             <th>Files</th>

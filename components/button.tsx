@@ -1,22 +1,21 @@
 import type { FC } from "react"
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Button: FC<{
   text: string
   type?: "button" | "submit" | "reset" | undefined
   isLoading?: boolean
+  onClick?: () => void
 }> = ({
   text = "",
   type,
-  isLoading = true,
+  isLoading,
+  onClick,
 }) => {
     return (
-      <button type={type} className="rounded-full border p-2 bg-gray-800 text-white hover:bg-gray-400 hover:border-transparent">
-        {
-          isLoading && (
-            <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
-            </svg>
-          )
-        }
+      <button onClick={onClick} type={type} className="rounded-full border p-2 bg-gray-800 text-white hover:bg-gray-400 hover:border-transparent">
+        {isLoading && <FontAwesomeIcon icon={faSpinner} className="animate-spin h-5 w-5 mr-3" />}
         {text}
       </button>
     )

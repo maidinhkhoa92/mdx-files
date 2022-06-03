@@ -1,11 +1,9 @@
 import { useForm } from "react-hook-form";
-import fs from "fs"
-import path from "path"
-
-import Button from "../../../components/button";
+import { useState } from "react";
 
 const Form = () => {
   const { control, handleSubmit, register } = useForm();
+  const [] = useState()
 
   const onSubmit = async () => {
     try {
