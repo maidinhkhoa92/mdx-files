@@ -4,7 +4,7 @@ import fs from "fs"
 import path from "path"
 
 type Data = {
-  id: string
+  data: string
 }
 const CONTENT_PATH = path.join(process.cwd(), 'pages/files')
 
