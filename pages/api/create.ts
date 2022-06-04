@@ -5,7 +5,7 @@ import path from "path"
 import { v4 as uuidv4 } from 'uuid';
 
 type Data = {
-  name: string
+  id: string
 }
 const CONTENT_PATH = path.join(process.cwd(), 'pages/files')
 
@@ -13,12 +13,11 @@ export default function create(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const id = uuidv4()
-  const { content } = req.body
-  fs.appendFile(`${CONTENT_PATH}/${id}.mdx`, content, function (err) {
+  const newId = uuidv4()
+  const { content, id } = req.body
+  fs.appendFile(`${CONTENT_PATH}/${id || newId}.mdx`, content, function (err) {
     if (err) throw err;
-    console.log('Saved!');
-  });
 
-  res.status(200).json({ name: id })
+    res.status(200).json({ id: id || newId })
+  });
 }

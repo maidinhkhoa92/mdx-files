@@ -1,10 +1,17 @@
 import type { FC } from "react"
-import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
+import dynamic from "next/dynamic";
+import { SimpleMDEReactProps } from "react-simplemde-editor"
 
-const Editor: FC = () => {
+const SimpleMdeEditor = dynamic(
+	() => import("react-simplemde-editor"),
+	{ ssr: false }
+);
+
+const Editor: FC = (props: SimpleMDEReactProps) => {
+  console.log(props)
     return (
-      <SimpleMDE />
+      <SimpleMdeEditor {...props} />
     )
   }
 

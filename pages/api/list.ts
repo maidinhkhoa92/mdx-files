@@ -15,7 +15,7 @@ export default function list(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const files = fs.readdirSync(CONTENT_PATH).map((eq) => ({ name: eq, url: `files/${eq.replace(/\.mdx?$/, '')}` }))
+  const files = fs.readdirSync(CONTENT_PATH).map((eq) => ({ name: eq, url: `files/${eq.replace(/\.mdx?$/, '')}`, id: eq.replace(/\.mdx?$/, '') }))
 
   res.status(200).json({ files })
 }

@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react"
 import type { NextPage } from 'next'
+import { useRouter } from "next/router"
 import Button from "../../../components/button"
 
 const List: NextPage = () => {
-  const [data, setData] = useState<{ name: string; url: string }[]>([])
+  const [data, setData] = useState<{ name: string; url: string; id: string }[]>([])
   const [isLoading, setLoading] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     setLoading(true)
@@ -19,7 +21,7 @@ const List: NextPage = () => {
   return (
     <div className="container mx-auto pt-5">
       <div className="flex justify-end mb-15">
-        <Button text="Create" />
+        <Button text="Create" onClick={() => router.push("/admin/mdx-files/form")} />
       </div>
       <table className="table-fixed w-full text-center">
         <thead>
@@ -34,7 +36,10 @@ const List: NextPage = () => {
             <tr key={index}>
               <td>{index + 1}</td>
               <td>{file.name}</td>
-              <td><Button text="Edit" /> <Button text="Delete" /></td>
+              <td>
+                <Button text="Edit" onClick={() => router.push(`/admin/mdx-files/form/${file.id}`)} />
+                <Button text="Delete" />
+              </td>
             </tr>
           ))}
         </tbody>
