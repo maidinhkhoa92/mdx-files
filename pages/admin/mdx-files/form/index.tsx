@@ -7,13 +7,18 @@ import axios from "axios"
 const Create = () => {
   const [id, setId] = useState()
   const [loading, setLoading] = useState(false)
+  const [saving, setSaving] = useState(false)
 
   const debounceQuery = _.debounce((content: string) => {
     axios.post('/api/create', { content, id }).then((response) => {
       setId(response?.data?.id)
-    })
-  }, 5000)
+    }).finally(() => setSaving(false))
+  }, 2000)
+
   const onChange = (value: string) => {
+    if (!saving) {
+      setSaving(true)
+    }
     debounceQuery(value);
   };
 
@@ -26,6 +31,9 @@ const Create = () => {
         </div>
       </div>
       <div className="w-full p-3">
+        {saving && (
+          <h4 className="text-center">Saving.....</h4>
+        )}
         <Editor onChange={onChange} />
       </div>
     </>

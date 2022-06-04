@@ -15,7 +15,7 @@ export default function create(
 ) {
   const newId = uuidv4()
   const { content, id } = req.body
-  fs.appendFile(`${CONTENT_PATH}/${id || newId}.mdx`, content, function (err) {
+  fs.writeFile(`${CONTENT_PATH}/${id || newId}.mdx`, content, function (err) {
     if (err) throw err;
 
     res.status(200).json({ id: id || newId })

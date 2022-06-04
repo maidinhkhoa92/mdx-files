@@ -11,6 +11,7 @@ const Update = () => {
   const { id } = router.query
   const [value, setValue] = useState("")
   const [loading, setLoading] = useState(false)
+  const [saving, setSaving] = useState(false)
 
   useEffect(() => {
     setLoading(true)
@@ -21,13 +22,17 @@ const Update = () => {
   }, [id])
 
   const debounceQuery = _.debounce((content: string) => {
-    axios.post('/api/create', { content, id })
-  }, 5000)
+    axios.post('/api/create', { content, id }).finally(() => setSaving(false))
+  }, 2000)
 
   const onChange = (value: string) => {
+    if (!saving) {
+      setSaving(true)
+    }
+    
     debounceQuery(value);
   };
-  console.log(value)
+
   return (
     <>
       <div className="bg-gray-800 pt-3">
@@ -36,6 +41,9 @@ const Update = () => {
         </div>
       </div>
       <div className="w-full p-3">
+        {saving && (
+          <h4 className="text-center">Saving.....</h4>
+        )}
         {loading ? <ContentLoading /> : <Editor onChange={onChange} value={value} />}
       </div>
     </>
