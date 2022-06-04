@@ -1,6 +1,7 @@
 import { FC, ReactNode } from "react"
-import { faUser, faIcons, faRobot, faTasks, faEnvelope, faChartArea, faWallet, } from '@fortawesome/free-solid-svg-icons'
+import { faIcons, faRobot, faTasks, faEnvelope, faChartArea, faWallet, } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Link from "next/link"
 
 const Layout: FC<{ children?: ReactNode }> = ({ children }) => {
   return (
@@ -42,23 +43,7 @@ const Layout: FC<{ children?: ReactNode }> = ({ children }) => {
                         <FontAwesomeIcon icon={faRobot} />
                       </span>
                       Hi, User
-                      <svg className="h-3 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                      </svg>
                     </button>
-                    <div id="myDropdown" className="dropdownlist absolute bg-gray-800 text-white right-0 mt-3 p-3 overflow-auto z-30 invisible">
-                      <input type="text" className="drop-search p-2 text-gray-600" placeholder="Search.." id="myInput" />
-                      <a href="#" className="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block">
-                        <FontAwesomeIcon icon={faUser} /> Profile
-                      </a>
-                      <a href="#" className="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block">
-                        <i className="fa fa-cog fa-fw"></i> Settings
-                      </a>
-                      <div className="border border-gray-800"></div>
-                      <a href="#" className="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block">
-                        <i className="fas fa-sign-out-alt fa-fw"></i> Log Out
-                      </a>
-                    </div>
                   </div>
                 </li>
               </ul>
@@ -73,36 +58,24 @@ const Layout: FC<{ children?: ReactNode }> = ({ children }) => {
               <div className="md:mt-12 md:w-48 md:fixed md:left-0 md:top-0 content-center md:content-start text-left justify-between">
                 <ul className="list-reset flex flex-row md:flex-col pt-3 md:py-3 px-1 md:px-2 text-center md:text-left">
                   <li className="mr-3 flex-1">
-                    <a href="#" className="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500">
-                      <FontAwesomeIcon icon={faTasks} className="pr-0 md:pr-3" />
-                      <span className="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">
-                        Tasks
-                      </span>
-                    </a>
+                    <Link href="/admin/mdx-files" >
+                      <div className="cursor-pointer block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500">
+                        <FontAwesomeIcon icon={faTasks} className="pr-0 md:pr-3" />
+                        <span className="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">
+                          Mdx Files
+                        </span>
+                      </div>
+                    </Link>
                   </li>
                   <li className="mr-3 flex-1">
-                    <a href="#" className="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
-                      <FontAwesomeIcon icon={faEnvelope} className="pr-0 md:pr-3" />
-                      <span className="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">
-                        Messages
-                      </span>
-                    </a>
-                  </li>
-                  <li className="mr-3 flex-1">
-                    <a href="#" className="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
-                      <FontAwesomeIcon icon={faChartArea} className="pr-0 md:pr-3 text-blue-600" />
-                      <span className="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">
-                        Analytics
-                      </span>
-                    </a>
-                  </li>
-                  <li className="mr-3 flex-1">
-                    <a href="#" className="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
-                      <FontAwesomeIcon icon={faWallet} className="pr-0 md:pr-3" />
-                      <span className="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">
-                        Payments
-                      </span>
-                    </a>
+                    <Link href="/" >
+                      <div className="cursor-pointer block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
+                        <FontAwesomeIcon icon={faWallet} className="pr-0 md:pr-3" />
+                        <span className="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">
+                          Logout
+                        </span>
+                      </div>
+                    </Link>
                   </li>
                 </ul>
               </div>

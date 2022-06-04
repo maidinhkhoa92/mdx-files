@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import fs from "fs"
 import path from "path"
+import { delay } from 'lodash'
 
 type Data = {
   files: {
@@ -15,7 +16,8 @@ export default function list(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const files = fs.readdirSync(CONTENT_PATH).map((eq) => ({ name: eq, url: `files/${eq.replace(/\.mdx?$/, '')}`, id: eq.replace(/\.mdx?$/, '') }))
-
-  res.status(200).json({ files })
+  delay(() => {
+    const files = fs.readdirSync(CONTENT_PATH).map((eq) => ({ name: eq, url: `files/${eq.replace(/\.mdx?$/, '')}`, id: eq.replace(/\.mdx?$/, '') }))
+    res.status(200).json({ files })
+  }, 3000)
 }
