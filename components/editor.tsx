@@ -8,8 +8,7 @@ const SimpleMdeEditor = dynamic(
 	{ ssr: false }
 );
 
-const Editor: FC = (props: SimpleMDEReactProps) => {
-  console.log(props)
+const Editor: FC<SimpleMDEReactProps> = (props) => {
     return (
       <SimpleMdeEditor {...props} />
     )
