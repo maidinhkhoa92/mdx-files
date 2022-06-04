@@ -23,7 +23,7 @@ const Update = () => {
 
   const debounceQuery = _.debounce((content: string) => {
     axios.post('/api/create', { content, id }).finally(() => setSaving(false))
-  }, 2000)
+  }, 5000)
 
   const onChange = (value: string) => {
     if (!saving) {

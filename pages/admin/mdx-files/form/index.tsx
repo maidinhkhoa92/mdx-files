@@ -13,7 +13,7 @@ const Create = () => {
     axios.post('/api/create', { content, id }).then((response) => {
       setId(response?.data?.id)
     }).finally(() => setSaving(false))
-  }, 2000)
+  }, 5000)
 
   const onChange = (value: string) => {
     if (!saving) {
