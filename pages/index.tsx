@@ -1,43 +1,17 @@
-import { useState, useEffect } from "react"
-import type { NextPage } from 'next'
-import Link from 'next/link'
-import { TabletLoading } from "../components/skeleton"
+import { useRouter } from 'next/router'
+import Button from "../components/button"
 
-const Home: NextPage = () => {
-  const [data, setData] = useState<{ name: string; url: string }[]>([])
-  const [isLoading, setLoading] = useState(false)
-
-  useEffect(() => {
-    setLoading(true)
-    fetch('api/list').then((res) => res.json())
-      .then((data) => {
-        setData(data.files)
-        setLoading(false)
-      })
-
-  }, [])
-
+const Login = () => {
+  const router = useRouter()
   return (
-    <div className="container mx-auto pt-5">
-      {isLoading ? <TabletLoading /> : <table className="table-fixed w-full text-center">
-        <thead>
-          <tr>
-            <th>Files</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((file, index) => (
-            <tr key={index}>
-              <td>{file.name}</td>
-              <td><Link href={file.url}>Click here to see detail</Link></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      }
+    <div className="container mx-auto pt-10">
+      <div className="flex justify-center">
+        <div className="box-border h-64 w-64 p-4 border-4 flex justify-center items-center">
+          <Button text="Login" onClick={() => router.push("/admin/mdx-files")} />
+        </div>
+      </div>
     </div>
   )
 }
 
-export default Home
+export default Login

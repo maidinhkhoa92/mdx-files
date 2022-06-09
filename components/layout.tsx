@@ -5,9 +5,9 @@ import Link from "next/link"
 
 const Layout: FC<{ children?: ReactNode }> = ({ children }) => {
   return (
-    <div className="bg-gray-800 font-sans leading-normal tracking-normal mt-12">
+    <div className="bg-gray-800 font-sans leading-normal tracking-normal">
       <header>
-        <nav className="bg-gray-800 pt-2 md:pt-1 pb-1 px-1 mt-0 h-auto fixed w-full z-20 top-0">
+        <nav className="bg-gray-800 pt-2 md:pt-1 pb-1 px-1 mt-0 h-auto w-full z-20 top-0">
 
           <div className="flex flex-wrap items-center">
             <div className="flex flex-shrink md:w-1/3 justify-center md:justify-start text-white">
@@ -54,8 +54,8 @@ const Layout: FC<{ children?: ReactNode }> = ({ children }) => {
       <main>
         <div className="flex flex-col md:flex-row">
           <nav>
-            <div className="bg-gray-800 shadow-xl h-20 fixed bottom-0 mt-12 md:relative md:h-screen z-10 w-full md:w-48 content-center">
-              <div className="md:mt-12 md:w-48 md:fixed md:left-0 md:top-0 content-center md:content-start text-left justify-between">
+            <div className="bg-gray-800 shadow-xl h-20 bottom-0 md:relative md:h-screen w-full md:w-48 content-center">
+              <div className="md:mt-12 md:w-48 md:left-0 md:top-0 content-center md:content-start text-left justify-between">
                 <ul className="list-reset flex flex-row md:flex-col pt-3 md:py-3 px-1 md:px-2 text-center md:text-left">
                   <li className="mr-3 flex-1">
                     <Link href="/admin/mdx-files" >

@@ -1,27 +1,22 @@
 import { useState } from "react";
 import _ from "lodash";
 import Editor from "../../../../components/editor";
+import Button from "../../../../components/button";
 import axios from "axios"
+import { useRouter } from "next/router";
 
 
 const Create = () => {
-  const [id, setId] = useState()
   const [loading, setLoading] = useState(false)
-  const [saving, setSaving] = useState(false)
+  const [value, setValue] = useState("")
+  const router = useRouter()
 
-  const debounceQuery = _.debounce((content: string) => {
-    axios.post('/api/create', { content, id }).then((response) => {
-      setId(response?.data?.id)
-    }).finally(() => setSaving(false))
-  }, 5000)
-
-  const onChange = (value: string) => {
-    if (!saving) {
-      setSaving(true)
-    }
-    debounceQuery(value);
+  const onChange = () => {
+    setLoading(true)
+    axios.post('/api/create', { content: value }).then(() => {
+      router.back()
+    }).finally(() => setLoading(false))
   };
-
 
   return (
     <>
@@ -30,11 +25,10 @@ const Create = () => {
           <h1 className="font-bold pl-2">Form</h1>
         </div>
       </div>
-      <div className="w-full p-3">
-        {saving && (
-          <h4 className="text-center">Saving.....</h4>
-        )}
-        <Editor onChange={onChange} />
+      <div className="w-full p-3 h-96 max-h-full overflow-y-scroll">
+        <Editor onChange={setValue} />
+        <Button isLoading={loading} text="Save and Exit" onClick={onChange} />
+        <Button text="Discard" onClick={() => router.back()} />
       </div>
     </>
   )

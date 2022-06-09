@@ -4,6 +4,7 @@ import Editor from "../../../../components/editor";
 import axios from "axios"
 import { useEffect, useState } from 'react';
 import { ContentLoading } from '../../../../components/skeleton';
+import Button from "../../../../components/button"
 
 
 const Update = () => {
@@ -11,7 +12,6 @@ const Update = () => {
   const { id } = router.query
   const [value, setValue] = useState("")
   const [loading, setLoading] = useState(false)
-  const [saving, setSaving] = useState(false)
 
   useEffect(() => {
     setLoading(true)
@@ -21,16 +21,12 @@ const Update = () => {
     })
   }, [id])
 
-  const debounceQuery = _.debounce((content: string) => {
-    axios.post('/api/create', { content, id }).finally(() => setSaving(false))
-  }, 5000)
-
-  const onChange = (value: string) => {
-    if (!saving) {
-      setSaving(true)
-    }
+  const onChange = () => {
+    setLoading(true)
     
-    debounceQuery(value);
+    axios.post('/api/create', { content: value, id }).then(() => {
+      router.back()
+    }).finally(() => setLoading(false))
   };
 
   return (
@@ -40,11 +36,11 @@ const Update = () => {
           <h1 className="font-bold pl-2">Form</h1>
         </div>
       </div>
-      <div className="w-full p-3">
-        {saving && (
-          <h4 className="text-center">Saving.....</h4>
-        )}
-        {loading ? <ContentLoading /> : <Editor onChange={onChange} value={value} />}
+      <div className="w-full p-3 h-96 max-h-full overflow-y-scroll">
+        {loading ? <ContentLoading /> : <Editor onChange={setValue} value={value} />}
+
+        <Button isLoading={loading} text="Save and Exit" onClick={onChange} />
+        <Button text="Discard" onClick={() => router.back()} />
       </div>
     </>
   )
